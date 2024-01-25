@@ -82,13 +82,13 @@ const ShowSC = ref(false)
 //处理重复歌手
 const FiltSinger = computed(() => {
     const singers = new Set(musiclist.map(i => i.singer));
-    console.log(Array.from(singers));
+    // console.log(Array.from(singers));
     return Array.from(singers);
 })
 //处理重复风格
 const FiltStyle = computed(() => {
     const style = new Set(musiclist.map(i => i.style));
-    console.log(Array.from(style));
+    // console.log(Array.from(style));
     return Array.from(style);
 })
 //复制文本到剪切板
@@ -105,7 +105,7 @@ const CopyClick = async (row) => {
             message: '复制失败',
             type: 'error',
         })
-        console.log(err);
+        // console.log(err);
     }
 }
 
@@ -133,7 +133,7 @@ const searchResults = computed(() => {
         results = results.filter(song => song.sc != 0);
     }
     if (nav.name) {
-        results = results.filter(song => song.name.includes(nav.name));
+        results = results.filter(song => typeof song.name === 'string' && song.name.includes(nav.name));
     }
     if (nav.singer !== '全部歌手') {
         results = results.filter(song => song.singer === nav.singer);
