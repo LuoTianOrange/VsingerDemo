@@ -31,7 +31,7 @@
                     <el-form-item class="form-item">
                         <el-select v-model="nav.lang" style="min-width: 60px;" placeholder="全部语言">
                             <el-option label="全部语言" value="全部语言"></el-option>
-                            <el-option v-for="i in language" :label="i" :value="i"></el-option>
+                            <el-option v-for="i in FiltLang" :label="i" :value="i"></el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item class="form-item">
@@ -74,11 +74,15 @@ const nav = reactive({
     sc: '',//sc数额
     des: ''
 })
-//语言选择
-const language = ref(['中文', '英语', '日语', '韩语'])
+
 //切换显示sc
 const ShowSC = ref(false)
 
+//处理重复语言
+const FiltLang = computed(() => {
+    const langs = new Set(musiclist.map(i => i.lang));
+    return Array.from(langs);
+})
 //处理重复歌手
 const FiltSinger = computed(() => {
     const singers = new Set(musiclist.map(i => i.singer));
